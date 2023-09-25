@@ -1,0 +1,99 @@
+<?php
+
+namespace {{ namespace }};
+
+#use Illuminate\Auth\Access\Response;
+use {{ namespacedModel }};
+use {{ namespacedUserModel }};
+
+class {{ class }}
+{
+    /**
+     * Determine whether the user can view any models.
+     *
+     * @param \{{ namespacedUserModel }}|null $user
+     *
+     * @return bool
+     */
+    public function viewAny(?{{ user }} $user): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can view the model.
+     *
+     * @param \{{ namespacedUserModel }}|null $user
+     * @param \{{ namespacedModel }} ${{ modelVariable }}
+     *
+     * @return bool
+     */
+    public function view(?{{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    {
+        return true;
+    }
+
+    /**
+     * Determine whether the user can create models.
+     *
+     * @param \{{ namespacedUserModel }} $user
+     *
+     * @return bool
+     */
+    public function create({{ user }} $user): bool
+    {
+        return $user->tokenCan('{{ modelVariable }}:create');
+    }
+
+   /**
+     * Determine whether the user can update the model.
+     *
+     * @param \{{ namespacedUserModel }} $user
+     * @param \{{ namespacedModel }} ${{ modelVariable }}
+     *
+     * @return bool
+     */
+    public function update({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    {
+        return $user->tokenCan('{{ modelVariable }}:update');
+    }
+
+    /**
+     * Determine whether the user can delete the model.
+     *
+     * @param \{{ namespacedUserModel }} $user
+     * @param \{{ namespacedModel }} ${{ modelVariable }}
+     *
+     * @return bool
+     */
+    public function delete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    {
+        return $user->tokenCan('{{ modelVariable }}:delete');
+    }
+
+    /**
+     * Determine whether the user can restore the model.
+     *
+     * @param \{{ namespacedUserModel }} $user
+     * @param \{{ namespacedModel }} ${{ modelVariable }}
+     *
+     * @return bool
+     */
+    public function restore({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    {
+        return $user->tokenCan('{{ modelVariable }}:restore');
+    }
+
+    /**
+     * Determine whether the user can permanently delete the model.
+     *
+     * @param \{{ namespacedUserModel }} $user
+     * @param \{{ namespacedModel }} ${{ modelVariable }}
+     *
+     * @return bool
+     */
+    public function forceDelete({{ user }} $user, {{ model }} ${{ modelVariable }}): bool
+    {
+        return $user->is_admin && $user->tokenCan('{{ modelVariable }}:forceDelete');
+    }
+}

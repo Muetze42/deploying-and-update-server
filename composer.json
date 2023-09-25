@@ -1,0 +1,102 @@
+{
+    "name": "norman-huth/deploying-and-update-server",
+    "type": "project",
+    "description": "A deploying and update server for Squirrel (Electron) apps.",
+    "homepage": "https://huth.it",
+    "support": {
+        "source": "https://github.com/Muetze42/deploying-and-update-server",
+        "issues": "https://github.com/Muetze42/deploying-and-update-server/issues",
+        "security": "https://github.com/Muetze42/deploying-and-update-server/issues"
+    },
+    "authors": [
+        {
+            "name": "Norman Huth",
+            "homepage": "https://huth.it"
+        }
+    ],
+    "keywords": [
+        "api",
+        "database",
+        "electron",
+        "electron-forge",
+        "framework",
+        "github-releases",
+        "http",
+        "laravel",
+        "restful-api",
+        "squirrel",
+        "update-server",
+        "updater",
+        "updates",
+        "webservice"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "^7.2",
+        "laravel/framework": "^10.10",
+        "laravel/sanctum": "^3.2",
+        "laravel/tinker": "^2.8",
+        "norman-huth/helpers-collection-laravel": "^1.1",
+        "norman-huth/laravel-api-controller": "dev-main",
+        "norman-huth/virus-total-php": "^1.0",
+        "spatie/laravel-activitylog": "^4.7",
+        "spatie/laravel-translatable": "^6.5"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.13",
+        "fakerphp/faker": "^1.9.1",
+        "laravel/pint": "^1.0",
+        "laravel/sail": "^1.18",
+        "mockery/mockery": "^1.4.4",
+        "nunomaduro/collision": "^7.0",
+        "phpunit/phpunit": "^10.1",
+        "spatie/laravel-ignition": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "functions/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
