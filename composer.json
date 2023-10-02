@@ -1,7 +1,7 @@
 {
     "name": "norman-huth/deploying-and-update-server",
     "type": "project",
-    "description": "A deploying and update server for Squirrel (Electron) apps.",
+    "description": "A deploying and update server for (Electron) apps.",
     "homepage": "https://huth.it",
     "support": {
         "source": "https://github.com/Muetze42/deploying-and-update-server",
@@ -24,7 +24,6 @@
         "http",
         "laravel",
         "restful-api",
-        "squirrel",
         "update-server",
         "updater",
         "updates",
