@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -48,6 +49,14 @@ class User extends Authenticatable
         'password' => 'hashed',
         'is_admin' => 'bool',
     ];
+
+    /**
+     * Get the releases created by the user.
+     */
+    public function releases(): HasMany
+    {
+        return $this->hasMany(Release::class);
+    }
 
     /**
      * Perform any actions required after the model boots.

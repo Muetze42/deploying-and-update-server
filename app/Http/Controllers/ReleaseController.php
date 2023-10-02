@@ -66,8 +66,13 @@ class ReleaseController extends Controller
             'releases'
         );
 
-        return $app->releases()->create(
+        $release = $app->releases()->create(
             $request->only(['version', 'platform', 'notes']) + ['filename' => $filename]
         );
+
+        /* @var \App\Models\Release $release */
+        $release->forceFill(['user_id' => $request->user()->getKey()])->save();
+
+        return $release;
     }
 }

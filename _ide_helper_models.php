@@ -130,12 +130,14 @@ namespace App\Models{
  * App\Models\Release
  *
  * @property int $id
+ * @property int|null $user_id
  * @property int $app_id
  * @property string $version
  * @property string $platform
  * @property array|null $notes
  * @property array|null $hashes
  * @property string|null $virus_total_id
+ * @property array|null $virus_total_stats
  * @property string|null $filename
  * @property bool $active
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -144,6 +146,7 @@ namespace App\Models{
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Activity> $activities
  * @property-read int|null $activities_count
  * @property-read \App\Models\App $app
+ * @property-read \App\Models\User|null $author
  * @method static \Illuminate\Database\Eloquent\Builder|Release active()
  * @method static \Illuminate\Database\Eloquent\Builder|Release filterByChannel(?string $channel)
  * @method static \Illuminate\Database\Eloquent\Builder|Release newModelQuery()
@@ -162,8 +165,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereNotes($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release wherePlatform($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereVersion($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release whereVirusTotalId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Release whereVirusTotalStats($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Release withTrashed()
  * @method static \Illuminate\Database\Eloquent\Builder|Release withoutTrashed()
  */
@@ -182,14 +187,12 @@ namespace App\Models{
  * @property string|null $version
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent $apps
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest query()
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest whereClient($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest wherePlatform($value)
  * @method static \Illuminate\Database\Eloquent\Builder|UpdateRequest whereReachableId($value)
@@ -218,6 +221,8 @@ namespace App\Models{
  * @property-read int|null $activities_count
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Release> $releases
+ * @property-read int|null $releases_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])

@@ -1,0 +1,780 @@
+{
+	"info": {
+		"_postman_id": "83a95eea-7152-40c6-9ad4-0b4fbe757ee6",
+		"name": "Deploying and update server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7458133"
+	},
+	"item": [
+		{
+			"name": "Activities",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/activities",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"activities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/login?email={{USER_EMAIL}}&password={{USER_PASSWORD}}",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "{{USER_EMAIL}}",
+									"description": "required|email"
+								},
+								{
+									"key": "password",
+									"value": "{{USER_PASSWORD}}",
+									"description": "required"
+								},
+								{
+									"key": "token_name",
+									"value": "",
+									"description": "nullable|string",
+									"disabled": true
+								},
+								{
+									"key": "abilities[]",
+									"value": "user:update",
+									"disabled": true
+								},
+								{
+									"key": "abilities[]",
+									"value": "package:create",
+									"disabled": true
+								},
+								{
+									"key": "abilities[]",
+									"value": "user:delete",
+									"disabled": true
+								},
+								{
+									"key": "abilities[]",
+									"value": "user:*",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/logout",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"logout"
+							]
+						},
+						"description": "Available as \\`get\\`, \\`post\\`, \\`put\\`, \\`patch\\`, \\`delete\\`, and \\`options\\` method."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users?name=Hugo&email=hugo@huth.it&password={{USER_PASSWORD}}&is_admin=1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Hugo"
+								},
+								{
+									"key": "email",
+									"value": "hugo@huth.it"
+								},
+								{
+									"key": "password",
+									"value": "{{USER_PASSWORD}}"
+								},
+								{
+									"key": "is_admin",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:id?is_admin=0",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "User 3",
+									"disabled": true
+								},
+								{
+									"key": "is_admin",
+									"value": "0"
+								},
+								{
+									"key": "email",
+									"value": "hugo@huth.it",
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:id/restore",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"restore"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Force Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/users/:id/force-delete",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"users",
+								":id",
+								"force-delete"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Apps",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps?name=Stream Games 42&source=https://github.com/Muetze42/stream-games-42&homepage=https://42gam.es&active=1",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Stream Games 42",
+									"description": "required"
+								},
+								{
+									"key": "source",
+									"value": "https://github.com/Muetze42/stream-games-42"
+								},
+								{
+									"key": "homepage",
+									"value": "https://42gam.es"
+								},
+								{
+									"key": "security",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "active",
+									"value": "1",
+									"description": "bool, default true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:id?name=My App 2",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":id"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "My App 2"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:id/restore",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":id",
+								"restore"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Force Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:id/force-delete",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":id",
+								"force-delete"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Releases",
+			"item": [
+				{
+					"name": "Index",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:appId/releases",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":appId",
+								"releases"
+							],
+							"variable": [
+								{
+									"key": "appId",
+									"value": "1",
+									"description": "Parent ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Draft release",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "version",
+									"value": "1.0.0-beta.1",
+									"description": "required",
+									"type": "text"
+								},
+								{
+									"key": "platform",
+									"value": "win32",
+									"description": "required|in:['aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'sunos', 'win32']",
+									"type": "text"
+								},
+								{
+									"key": "notes[en]",
+									"value": "More more more",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "notes[de]",
+									"value": "Mehr mehr mehr",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/xampp/htdocs/apps/stream-games-42/stream-games-42/dist/stream-games-42-1.0.0-beta.1-setup.exe"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/apps/:appId/releases",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":appId",
+								"releases"
+							],
+							"variable": [
+								{
+									"key": "appId",
+									"value": "1",
+									"description": "Parent ID"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/apps/:appId/releases/:id",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"apps",
+								":appId",
+								"releases",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "appId",
+									"value": "1",
+									"description": "Parent ID"
+								},
+								{
+									"key": "id",
+									"value": "2",
+									"description": "ID"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Updater",
+			"item": [
+				{
+					"name": "Check",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "channel",
+								"value": "beta",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/update/:slug/:plattform/:version",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"update",
+								":slug",
+								":plattform",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "stream-games-42"
+								},
+								{
+									"key": "plattform",
+									"value": "win32"
+								},
+								{
+									"key": "version",
+									"value": "1.0.0-beta.0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "channel",
+								"value": "stable",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HOST}}/update/:slug/:plattform/:version",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"update",
+								":slug",
+								":plattform",
+								":version"
+							],
+							"variable": [
+								{
+									"key": "slug",
+									"value": "stream-games-42"
+								},
+								{
+									"key": "plattform",
+									"value": "win32"
+								},
+								{
+									"key": "version",
+									"value": "1.0.0-beta.0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Home",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}",
+					"host": [
+						"{{HOST}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "localhost",
+			"type": "string"
+		},
+		{
+			"key": "TOKEN",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "USER_EMAIL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "USER_PASSWORD",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

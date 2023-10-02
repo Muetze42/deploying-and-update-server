@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use App\Jobs\Release\VirusScanBeforeActivate;
 use App\Traits\Models\CanActiveTrait;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -15,7 +15,6 @@ use Spatie\Translatable\HasTranslations;
 class Release extends Model
 {
     use CanActiveTrait;
-    use HasFactory;
     use LogsActivityTrait;
     use SoftDeletes;
     use HasTranslations;
@@ -40,7 +39,8 @@ class Release extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'hashes' => 'array'
+        'hashes' => 'array',
+        'virus_total_stats' => 'array',
     ];
 
     /**
@@ -49,6 +49,14 @@ class Release extends Model
     public function app(): BelongsTo
     {
         return $this->belongsTo(App::class);
+    }
+
+    /**
+     * Get the author of the release.
+     */
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     /**
@@ -65,8 +73,10 @@ class Release extends Model
                     'md5' => md5_file($file),
                     'sha1' => sha1_file($file)
                 ];
-                $release->active = true; // Queue: Activate after VirusTotal scan
             }
+        });
+        static::created(function (self $release) {
+            VirusScanBeforeActivate::dispatch($release);
         });
     }
 
