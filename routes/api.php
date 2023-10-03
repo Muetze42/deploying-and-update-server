@@ -53,7 +53,7 @@ Route::resource('apps.releases', NestedController::class);
 Route::post('apps/{app}/releases', [ReleaseController::class, 'draftRelease']);
 
 /**
- * TAuthorization.
+ * Authorization.
  */
 Route::controller(AuthController::class)
     ->name('auth.')
