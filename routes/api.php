@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReleaseController;
 use App\Http\Controllers\UpdateController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\IpMiddleware;
 use Illuminate\Support\Facades\Route;
 use NormanHuth\HelpersLaravel\App\Http\Middleware\SanctumOptional;
 use NormanHuth\LaravelApiController\Controller;
@@ -34,7 +35,7 @@ Route::get('update/{slug}/{platform}/download', [UpdateController::class, 'downl
 Route::get('update/{slug}/{platform}/{version}', [UpdateController::class, 'check'])
     ->name('update.check');
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', IpMiddleware::class])->group(function () {
     /**
      * The authenticated User routes.
      */
